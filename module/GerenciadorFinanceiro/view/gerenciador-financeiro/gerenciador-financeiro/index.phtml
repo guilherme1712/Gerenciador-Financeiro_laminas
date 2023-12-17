@@ -1,0 +1,167 @@
+<head>
+</head>
+
+<div class="col-content">
+    <div class="row index-h1">
+        <h1 class="col-6">Lista de Contas</h1>
+
+        <h1 class="col-6">Lista de Créditos</h1>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <table class="table">
+                <thead style="position: sticky; top: 0; opacity: 1; z-index: 3;">
+                    <tr>
+                        <!-- <th></th> -->
+                        <th>Data</th>
+                        <th>Conta</th>
+                        <th>Valor</th>
+                        <th>Recorrente</th>
+                        <th>Termino Recorrente</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $i=0; foreach ($this->contas as $conta) { ?>
+                        <tr>
+                            <!-- <td><?= $i ?></td> -->
+                            <td><?= date('d/m/Y', strtotime($conta['data'])) ?></td>
+                            <td><?= $conta['descricao'] ?></td>
+                            <td><?= 'R$ '. $conta['valor'] ?></td>
+                            <td><?= $conta['recorrente'] ? 'Sim' : 'Não' ?></td>
+                            <td><?= date('d/m/Y', strtotime($conta['data_termino_recorrente'])) ?></td>
+                            <td><?= ($conta['status'] == 1) ? 'Pago' : 'Não Pago' ?></td>
+                            <td>
+                                <a href="<?= $this->url('gerenciador-financeiro', ['action' => 'editConta', 'id' => $conta['id']]) ?>">Editar</a>
+                                <a href="<?= $this->url('gerenciador-financeiro', ['action' => 'deleteConta', 'id' => $conta['id']]) ?>">Excluir</a>
+                            </td>
+
+                            <input type="hidden" class="contaId" id="contaId" value="><?= $conta['id'] ?>">
+                        </tr>
+                    <?php $i++; } ?>
+                </tbody>
+                    </table>
+        </div>
+
+        <div class="col-6">
+            <table class="table">
+                <thead style="position: sticky; top: 0; opacity: 1; z-index: 3;">
+                    <tr>
+                        <!-- <th></th> -->
+                        <th>Data</th>
+                        <th>Crédito</th>
+                        <th>Valor</th>
+                        <th>Recorrente</th>
+                        <th>Termino Recorrente</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php  $j=0; foreach ($this->creditos as $credito) { ?>
+                        <tr>
+                            <!-- <td><?= $j ?></td> -->
+                            <td><?= date('d/m/Y', strtotime($credito['data'])) ?></td>
+                            <td><?= $credito['descricao'] ?></td>
+                            <td><?= 'R$ '. $credito['valor'] ?></td>
+                            <td><?= $credito['recorrente'] ? 'Sim' : 'Não' ?></td>
+                            <td><?= date('d/m/Y', strtotime($credito['data_termino_recorrente'])) ?></td>
+                            <td><?= ($credito['status'] == 1) ? 'Creditado' : 'Não Creditado' ?></td>
+                            <td>
+                                <a href="<?= $this->url('gerenciador-financeiro', ['action' => 'editCredito', 'id' => $credito['id']]) ?>">Editar</a>
+                                <a href="<?= $this->url('gerenciador-financeiro', ['action' => 'deleteCredito', 'id' => $credito['id']]) ?>">Excluir</a>
+                            </td>
+
+                            <input type="hidden" class="contaId" id="contaId" value="><?= $credito['id'] ?>">
+                        </tr>
+                    <?php $j++; } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row totais">
+        <div class="col-3">
+            <p>Total de Contas do Mês: <?="R$ " . $this->totalContas ?></p>
+        </div>
+        <div class="col-4">
+            <p>Total do Mês: <?="R$ " . $this->totalMes ?></p>
+        </div>
+        <div class="col-3">
+            <p>Total de Créditos do Mês: <?="R$ " . $this->totalCreditos ?></p>
+        </div>
+    </div>
+
+    <div class="row"></div>
+
+    <div class="row">
+        <div class="col-6">
+            <table class="table">
+                <thead style="position: sticky; top: 0; opacity: 1; z-index: 3;">
+                    <tr>
+                        <!-- <th></th> -->
+                        <th>Termino Recorrente</th>
+                        <th>Conta</th>
+                        <th class="col-2">Valor</th>
+                        <th>Banco</th>
+                        <th>Categoria</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php  $j=0; foreach ($this->contasInfo as $contaInfo) { ?>
+                        <tr>
+                            <!-- <td><?= $j ?></td> -->
+                            <td><?= date('d/m/Y', strtotime($contaInfo['data_termino_recorrente'])) ?></td>
+                            <td><?= $contaInfo['descricao'] ?></td>
+                            <td><?= 'R$ '. $contaInfo['valor'] ?></td>
+                            <td><?= $contaInfo['nome'] ?></td>
+                            <td><?= $contaInfo['categoria'] ?></td>
+                            <td>
+                                <a href="<?= $this->url('gerenciador-financeiro', ['action' => 'editConta', 'id' => $contaInfo['id']]) ?>">Editar</a>
+                                <a href="<?= $this->url('gerenciador-financeiro', ['action' => 'deleteConta', 'id' => $contaInfo['id']]) ?>">Excluir</a>
+                            </td>
+
+                            <input type="hidden" class="contaId" id="contaId" value="><?= $contaInfo['id'] ?>">
+                        </tr>
+                    <?php $j++; } ?>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-6">
+            <table class="table">
+                <thead style="position: sticky; top: 0; opacity: 1; z-index: 3;">
+                    <tr class="text-primary">
+                        <!-- <th></th> -->
+                        <th>Termino Recorrente</th>
+                        <th>Conta</th>
+                        <th class="col-2">Valor</th>
+                        <th>Banco</th>
+                        <th>Categoria</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php  $j=0; foreach ($this->creditosInfo as $creditoInfo) { ?>
+                        <tr>
+                            <!-- <td><?= $j ?></td> -->
+                            <td><?= date('d/m/Y', strtotime($creditoInfo['data_termino_recorrente'])) ?></td>
+                            <td><?= $creditoInfo['descricao'] ?></td>
+                            <td><?= 'R$ '. $creditoInfo['valor'] ?></td>
+                            <td><?= $creditoInfo['nome'] ?></td>
+                            <td><?= $creditoInfo['categoria'] ?></td>
+                            <td>
+                                <a href="<?= $this->url('gerenciador-financeiro', ['action' => 'editCredito', 'id' => $creditoInfo['id']]) ?>">Editar</a>
+                                <a href="<?= $this->url('gerenciador-financeiro', ['action' => 'deleteCredito', 'id' => $creditoInfo['id']]) ?>">Excluir</a>
+                            </td>
+
+                            <input type="hidden" class="contaId" id="contaId" value="><?= $creditoInfo['id'] ?>">
+                        </tr>
+                    <?php $j++; } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+    }
+
+    p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    a {
+        text-decoration: none;
+        color: #007bff;
+        margin-right: 10px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        color: #0056b3;
+    }
+
+    h1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .table th,
+    .table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center; /* Centraliza horizontalmente */
+        vertical-align: middle; /* Centraliza verticalmente */
+    }
+
+    .table th {
+        background-color: #f2f2f2;
+    }
+
+    .col-content {
+        margin-left: 1%;
+        margin-top: 20px;
+    }
+
+    .row {
+        margin-right: 0px !important;
+    }
+
+
+</style>
+
+<div class="col-content">
+    <div class="row">
+        <h1 class="col-12">Lista de Crédito</h1>
+
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <thead style="position: sticky; top: 0; opacity: 1; z-index: 3;">
+                    <tr>
+                        <th></th>
+                        <th>Data</th>
+                        <th>Conta</th>
+                        <th>Valor</th>
+                        <th>Recorrente</th>
+                        <th>Termino Recorrente</th>
+                        <th>Banco</th>
+                        <th>Categoria</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $i=0; foreach ($this->listadoCreditos as $listadoCredito) { ?>
+                        <tr>
+                            <td><?= $i ?></td>
+                            <td><?= date('d/m/Y', strtotime($listadoCredito['data'])) ?></td>
+                            <td><?= $listadoCredito['descricao'] ?></td>
+                            <td><?= $listadoCredito['valor'] ?></td>
+                            <td><?= $listadoCredito['recorrente'] ? 'Sim' : 'Não' ?></td>
+                            <td><?= date('d/m/Y', strtotime($listadoCredito['data_termino_recorrente'])) ?></td>
+                            <td><?= $listadoCredito['banco'] ?></td>
+                            <td><?= $listadoCredito['categoria'] ?></td>
+                            <td><?= ($listadoCredito['status'] == 1) ? 'Creditado' : 'Não Creditado' ?></td>
+
+                            <input type="hidden" class="listadoCreditoId" id="listadoCreditoId" value="><?= $listadoCredito['id'] ?>">
+                        </tr>
+                    <?php $i++; } ?>
+                </tbody>
+                    </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <p>Total de Créditos do Mês: <?="R$ " . $this->totalCreditos ?></p>
+        </div>
+    </div>
+
+    <a class="btn btn-back" href="<?= $this->url('menu') ?>">Voltar</a>
+</div>

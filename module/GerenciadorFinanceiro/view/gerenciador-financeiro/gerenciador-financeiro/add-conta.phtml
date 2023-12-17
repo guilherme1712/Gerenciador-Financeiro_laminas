@@ -1,0 +1,143 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Conta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* input[type="text"],
+        input[type="date"],
+        input[type="checkbox"],
+        select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        } */
+
+        input[type="text"],
+        input[type="date"],
+        input[type="checkbox"]
+        select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary, .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #013755;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #012345;
+        }
+
+        .btn-back {
+            background-color: #ccc;
+            color: #000;
+            margin-right: 10px;
+        }
+
+        .btn-back:hover {
+            background-color: #bbb;
+        }
+
+        #data_termino_recorrente {
+            display: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Adicionar Conta</h2>
+
+        <?php
+            $form = $this->form;
+            $form->setAttribute('action', $this->url('gerenciador-financeiro', ['action' => 'addConta']));
+            $form->prepare();
+
+            echo $this->form()->openTag($form);
+            echo $this->formHidden($form->get('id'));
+
+            echo '<div class="form-group">';
+            echo $this->formRow($form->get('data'));
+            echo '</div>';
+
+            echo '<div class="form-group">';
+            echo $this->formRow($form->get('descricao'));
+            echo '</div>';
+
+            echo '<div class="form-group">';
+            echo $this->formRow($form->get('valor'));
+            echo '</div>';
+
+            echo '<div class="form-group">';
+            echo $this->formRow($form->get('recorrente'));
+            echo '</div>';
+
+            echo '<div class="form-group">';
+            echo $this->formRow($form->get('data_termino_recorrente'));
+            echo '</div>';
+
+            echo '<div class="form-group">';
+            echo $this->formRow($form->get('status'));
+            echo '</div>';
+
+            echo '<div class="form-group">';
+            echo $this->formRow($form->get('banco'));
+            echo '</div>';
+
+            echo '<div class="form-group">';
+            echo $this->formRow($form->get('categoria'));
+            echo '</div>';
+
+            echo '<div class="form-group">';
+            echo $this->formSubmit($form->get('submit'));
+            echo '</div>';
+
+            echo $this->form()->closeTag();
+        ?>
+
+        <a class="btn-back" href="<?= $this->url('menu') ?>">Voltar</a>
+    </div>
+</body>

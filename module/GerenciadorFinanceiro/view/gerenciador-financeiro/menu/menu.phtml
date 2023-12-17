@@ -1,0 +1,44 @@
+<!-- module/GerenciadorFinanceiro/view/gerenciador-financeiro/gerenciador-financeiro/menu.phtml -->
+
+<style>
+    /* Adicione este trecho ao seu arquivo de estilos CSS ou ao cabeçalho do documento */
+    .btn-primary {
+        background-color: #013755;
+        color: #fff;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        display: inline-block;
+        transition: background-color 0.3s ease; /* Adiciona um efeito de transição suave na mudança de cor de fundo */
+    }
+
+    .btn-primary:hover {
+        background-color: #012345;
+    }
+
+    .content {
+        /* display: flex; */
+        align-items: center;
+        justify-content: center;
+        margin-left: 6%;
+    }
+
+</style>
+
+<div class="content">
+    <div style="margin-top: 20px;">
+        <a class="btn btn-primary" href="<?= $this->url('gerenciador-financeiro', ['action' => 'addConta']) ?>">Adicionar Nova Conta</a>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <a class="btn btn-primary" href="<?= $this->url('gerenciador-financeiro', ['action' => 'addCredito']) ?>">Adicionar Novo Crédito</a>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <a class="btn btn-primary" href="<?= $this->url('gerenciador-financeiro', ['action' => 'buscaListadoContas']) ?>">Listado de Contas</a>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <a class="btn btn-primary" href="<?= $this->url('gerenciador-financeiro', ['action' => 'buscaListadoCredito']) ?>">Listado de Crédito</a>
+    </div>
+</div>

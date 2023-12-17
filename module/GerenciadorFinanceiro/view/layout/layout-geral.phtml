@@ -1,0 +1,63 @@
+<!-- module/GerenciadorFinanceiro/view/layout/layout-GerenciadorFinanceiro.phtml -->
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<?= $this->doctype() ?>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><?= $this->escapeHtml($this->pageTitle ?? 'Gerenciador Financeiro') ?></title>
+        <!-- Le styles -->
+        <?= $this->headLink()
+            // ->prependStylesheet($this->basePath() . '/css/style.css')
+            ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+        ?>
+
+        <!-- Scripts -->
+        <?= $this->headScript()
+            ->prependFile($this->basePath() . '/js/index.js')
+            ->prependFile($this->basePath() . '/js/jquery.min.js')
+        ?>
+
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            #menu {
+                width: 15%;
+                height: 100vh;
+                background-color: #333;
+                color: #fff;
+                float: left;
+                position: fixed;
+            }
+
+            #col-content {
+                width: 85%;
+                height: 100vh;
+                margin-left: 15%;
+            }
+
+            iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="menu">
+            <iframe src="<?= $this->url('menu') ?>"></iframe>
+        </div>
+
+        <div id="col-content">
+            <?= $this->content ?>
+        </div>
+    </body>
+</html>
